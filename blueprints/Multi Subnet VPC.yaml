@@ -2,7 +2,7 @@ spec_version: 2
 description: An AWS VPC with multiple subnets and an internet gateway (standardized environment for other Blueprints)
 instructions:
   source:
-    store: Torque-Samples
+    store: Torque-Samples-ab
     path: instructions/Multi_Subnet_VPC.md
 inputs:
   AWS Region:
@@ -11,13 +11,13 @@ inputs:
     allowed-values: ["Ireland | eu-west-1"]
 outputs:
   app_subnet_a_id:
-    value: '{{ .grains.EnvironmentInfrastructure.outputs.AppSubnetAID }}'
+    value: "{{ .grains.EnvironmentInfrastructure.outputs.AppSubnetAID }}"
     quick: false
   app_subnet_b_id:
-    value: '{{ .grains.EnvironmentInfrastructure.outputs.AppSubnetBID }}'
+    value: "{{ .grains.EnvironmentInfrastructure.outputs.AppSubnetBID }}"
     quick: false
   default_security_group_id:
-    value: '{{ .grains.EnvironmentInfrastructure.outputs.DefaultSecurityGroupID }}'
+    value: "{{ .grains.EnvironmentInfrastructure.outputs.DefaultSecurityGroupID }}"
     quick: false
 
 grains:
@@ -25,15 +25,15 @@ grains:
     kind: cloudformation
     spec:
       source:
-        store: Torque-Samples
+        store: Torque-Samples-ab
         path: assets/cloudformation/MultiSubnetVPC.yaml
       agent:
         name: Sample-Agent
       inputs:
-      - Region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
+        - Region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
       env-vars: []
       outputs:
-      - AppSubnetAID
-      - AppSubnetBID
-      - DefaultSecurityGroupID
+        - AppSubnetAID
+        - AppSubnetBID
+        - DefaultSecurityGroupID
       region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'

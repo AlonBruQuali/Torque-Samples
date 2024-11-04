@@ -2,7 +2,7 @@ spec_version: 2
 description: A single page HTML based Tetris game deployed as a static website on S3 using CFN and TF
 instructions:
   source:
-    store: Torque-Samples
+    store: Torque-Samples-ab
     path: instructions/Webgame.md
 inputs:
   Bucket Name:
@@ -26,33 +26,33 @@ outputs:
 grains:
   S3-Bucket:
     kind: cloudformation
-    spec: 
+    spec:
       source:
-        store: Torque-Samples
+        store: Torque-Samples-ab
         path: assets/cloudformation/AWSS3Bucket.yaml
       region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
       agent:
         name: Sample-Agent
       inputs:
-      - AccessControl: '{{ .inputs.["Access Control"] }}'
-      - BucketName: '{{ .inputs.["Bucket Name"] }}-{{ envid | downcase }}'
+        - AccessControl: '{{ .inputs.["Access Control"] }}'
+        - BucketName: '{{ .inputs.["Bucket Name"] }}-{{ envid | downcase }}'
       outputs:
-      - Arn
-      - DomainName
+        - Arn
+        - DomainName
   S3 Webapp Upload:
     kind: terraform
     depends-on: S3-Bucket
     spec:
       source:
-        store: Torque-Samples
+        store: Torque-Samples-ab
         path: assets/terraform/aws/s3-upload-webapp
       agent:
         name: Sample-Agent
       inputs:
-      - bucket_name: '{{ .inputs.["Bucket Name"] }}-{{ envid | downcase }}'
-      - region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
+        - bucket_name: '{{ .inputs.["Bucket Name"] }}-{{ envid | downcase }}'
+        - region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
       outputs:
-      - website_link
+        - website_link
   App Health Check:
     kind: shell
     depends-on: S3 Webapp Upload

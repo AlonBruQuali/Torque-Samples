@@ -1,10 +1,10 @@
 spec_version: 2
 description: >
-      A Sample Weather app deployed as a static website on an EC2 Ubuntu Linux VM 
-      with Ansible post deployment installation and configuration.
+  A Sample Weather app deployed as a static website on an EC2 Ubuntu Linux VM 
+  with Ansible post deployment installation and configuration.
 instructions:
   source:
-    store: Torque-Samples
+    store: Torque-Samples-ab
     path: instructions/Weather_App.md
 inputs:
   AWS Region:
@@ -22,8 +22,8 @@ grains:
   Multi Subnet VPC:
     kind: blueprint
     spec:
-      source: 
-        store: Torque-Samples
+      source:
+        store: Torque-Samples-ab
         path: blueprints
       inputs:
         - aws_region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
@@ -36,29 +36,29 @@ grains:
     depends-on: Multi Subnet VPC
     spec:
       source:
-        store: Torque-Samples
+        store: Torque-Samples-ab
         path: assets/terraform/aws/ec2_instance
       agent:
         name: Sample-Agent
       inputs:
-      - app_subnet_a_id: '{{ .grains.["Multi Subnet VPC"].outputs.app_subnet_a_id }}'
-      - aws_region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
-      - default_security_group_id: '{{ .grains.["Multi Subnet VPC"].outputs.default_security_group_id }}'
-      - instance_type: 't3a.medium'
-      - keypair_name: 'TorqueSandbox'
-      - inbound_port: "80"
-      - source_ami: "ami-016587dea5af03adb | Ubuntu with credentials"      
+        - app_subnet_a_id: '{{ .grains.["Multi Subnet VPC"].outputs.app_subnet_a_id }}'
+        - aws_region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
+        - default_security_group_id: '{{ .grains.["Multi Subnet VPC"].outputs.default_security_group_id }}'
+        - instance_type: "t3a.medium"
+        - keypair_name: "TorqueSandbox"
+        - inbound_port: "80"
+        - source_ami: "ami-016587dea5af03adb | Ubuntu with credentials"
       env-vars: []
       outputs:
-      - instance-port-link
-      - instance-ip
+        - instance-port-link
+        - instance-ip
     tf-version: 1.5.5
   Apache_Webapp_Install:
     depends-on: App Instance
     kind: ansible
     spec:
       source:
-        store: Torque-Samples
+        store: Torque-Samples-ab
         path: assets/ansible/install_apache2_webapp_ubuntu_cloud.yaml
       agent:
         name: Sample-Agent
@@ -67,10 +67,9 @@ grains:
           hosts:
             ubuntu_machine:
               ansible_host: '{{ .grains.["App Instance"].outputs.instance-ip }}'
-              ansible_user: 'ubuntu'
-              ansible_password: 'Quali@AWS'
+              ansible_user: "ubuntu"
+              ansible_password: "Quali@AWS"
           vars:
-            ansible_become: yes 
+            ansible_become: yes
             ansible_become_method: sudo
-            ansible_become_pass: 'Quali@AWS'
-
+            ansible_become_pass: "Quali@AWS"
