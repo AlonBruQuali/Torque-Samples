@@ -32,7 +32,7 @@ grains:
         path: assets/cloudformation/AWSS3Bucket.yaml
       region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
       agent:
-        name: Quali
+        name: vido-vido-prod
       inputs:
         - AccessControl: '{{ .inputs.["Access Control"] }}'
         - BucketName: '{{ .inputs.["Bucket Name"] }}-{{ envid | downcase }}'
@@ -47,7 +47,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/terraform/aws/s3-upload-webapp
       agent:
-        name: Quali
+        name: vido-vido-prod
       inputs:
         - bucket_name: '{{ .inputs.["Bucket Name"] }}-{{ envid | downcase }}'
         - region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
@@ -58,7 +58,7 @@ grains:
     depends-on: S3 Webapp Upload
     spec:
       agent:
-        name: Quali
+        name: vido-vido-prod
       activities:
         deploy:
           commands:

@@ -28,7 +28,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/cloudformation/MultiSubnetVPC.yaml
       agent:
-        name: Quali
+        name: vido-vido-prod
       inputs:
         - Region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
       env-vars: []

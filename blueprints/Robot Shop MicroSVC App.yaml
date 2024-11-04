@@ -41,7 +41,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/terraform/aws/rds
       agent:
-        name: Quali
+        name: vido-vido-prod
       inputs:
         - env_id: "{{ envid | downcase }}"
         - size: '{{ .inputs.["DB Engine Instance Size"] }}'
@@ -62,7 +62,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/helm/s3__crossplane
       agent:
-        name: Quali
+        name: vido-vido-prod
       inputs:
         - AWSRegion: eu-west-1
         - BucketACL: private
@@ -85,7 +85,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/helm/robotShop
       agent:
-        name: Quali
+        name: vido-vido-prod
       scripts:
         post-helm-install:
           source:

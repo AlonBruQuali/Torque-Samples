@@ -24,7 +24,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/terraform/aws/hello-world-lambda
       agent:
-        name: Quali
+        name: vido-vido-prod
       inputs:
         - aws_region: eu-west-1
         - lambda_bucket_name: torque-samples-storage
@@ -41,7 +41,7 @@ grains:
     depends-on: Serverless API
     spec:
       agent:
-        name: Quali
+        name: vido-vido-prod
       activities:
         deploy:
           commands:

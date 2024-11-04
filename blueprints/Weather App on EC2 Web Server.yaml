@@ -39,7 +39,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/terraform/aws/ec2_instance
       agent:
-        name: Quali
+        name: vido-vido-prod
       inputs:
         - app_subnet_a_id: '{{ .grains.["Multi Subnet VPC"].outputs.app_subnet_a_id }}'
         - aws_region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
@@ -61,7 +61,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/ansible/install_apache2_webapp_ubuntu_cloud.yaml
       agent:
-        name: Quali
+        name: vido-vido-prod
       inventory-file:
         all:
           hosts:
