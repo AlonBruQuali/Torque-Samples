@@ -41,7 +41,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/terraform/aws/rds
       agent:
-        name: Sample-Agent
+        name: Quali
       inputs:
         - env_id: "{{ envid | downcase }}"
         - size: '{{ .inputs.["DB Engine Instance Size"] }}'
@@ -62,7 +62,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/helm/s3__crossplane
       agent:
-        name: Sample-Agent
+        name: Quali
       inputs:
         - AWSRegion: eu-west-1
         - BucketACL: private
@@ -85,7 +85,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/helm/robotShop
       agent:
-        name: Sample-Agent
+        name: Quali
       scripts:
         post-helm-install:
           source:

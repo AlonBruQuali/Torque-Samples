@@ -28,7 +28,7 @@ grains:
         store: Torque-Samples-ab
         path: assets/cloudformation/MultiSubnetVPC.yaml
       agent:
-        name: Sample-Agent
+        name: Quali
       inputs:
         - Region: '{{ .inputs.["AWS Region"] | split: "|" | last | strip }}'
       env-vars: []
